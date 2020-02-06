@@ -103,17 +103,17 @@ public class RemoteSession {
 	}
 
 	public void queuePlayerInteractEvent(PlayerInteractEvent event) {
-		//plugin.getLogger().info(event.toString());
+		plugin.getLogger().info(event.toString());
 		interactEventQueue.add(event);
 	}
 
 	public void queueChatPostedEvent(AsyncPlayerChatEvent event) {
-		//plugin.getLogger().info(event.toString());
+		plugin.getLogger().info(event.toString());
 		chatPostedQueue.add(event);
 	}
 	
 	public void queueProjectileHitEvent(ProjectileHitEvent event) {
-		//plugin.getLogger().info(event.toString());
+		plugin.getLogger().info(event.toString());
 
 		if (event.getEntityType() == EntityType.ARROW) {
 			Arrow arrow = (Arrow) event.getEntity();
@@ -155,11 +155,11 @@ public class RemoteSession {
 	}
 
 	protected void handleLine(String line) {
-		//System.out.println(line);
+		System.out.println(line);
 		String methodName = line.substring(0, line.indexOf("("));
 		//split string into args, handles , inside " i.e. ","
 		String[] args = line.substring(line.indexOf("(") + 1, line.length() - 1).split(",");
-		//System.out.println(methodName + ":" + Arrays.toString(args));
+		System.out.println(methodName + ":" + Arrays.toString(args));
 		handleCommand(methodName, args);
 	}
 
@@ -473,7 +473,7 @@ public class RemoteSession {
 			} else if (c.equals("entity.getPos")) {
 				//get entity based on id
 				Entity entity = plugin.getEntity(Integer.parseInt(args[0]));
-				//Player entity = plugin.getEntity(Integer.parseInt(args[0]));
+				Player entity = plugin.getEntity(Integer.parseInt(args[0]));
 				if (entity != null) {
 					send(locationToRelative(entity.getLocation()));
 				} else {
@@ -594,7 +594,7 @@ public class RemoteSession {
 				if ((thisBlock.getTypeId() != blockType) || (thisBlock.getData() != blockData)) {
 					thisBlock.setTypeIdAndData(blockType, blockData, true);
 				}
-				//plugin.getLogger().info("Creating sign at " + loc);
+				plugin.getLogger().info("Creating sign at " + loc);
 				if ( thisBlock.getState() instanceof Sign ) {
 					Sign sign = (Sign) thisBlock.getState();
 					for ( int i = 5; i-5 < 4 && i < args.length; i++) {
@@ -1001,12 +1001,12 @@ public class RemoteSession {
 			while (running) {
 				try {
 					String newLine = in.readLine();
-					//System.out.println(newLine);
+					System.out.println(newLine);
 					if (newLine == null) {
 						running = false;
 					} else {
 						inQueue.add(newLine);
-						//System.out.println("Added to in queue");
+						System.out.println("Added to in queue");
 					}
 				} catch (Exception e) {
 					// if its running raise an error
