@@ -103,7 +103,7 @@ public class RaspberryJuicePlugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void PlayerJoin(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
-		//p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2, true, false));	// give night vision power
+		p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 2, true, false));	// give night vision power
 		Server server = getServer();
 		server.broadcastMessage("Welcome " + p.getPlayerListName());
 	}
@@ -134,7 +134,7 @@ public class RaspberryJuicePlugin extends JavaPlugin implements Listener {
 	@EventHandler(ignoreCancelled=true)
 	public void onChatPosted(AsyncPlayerChatEvent event) {
 		//debug
-		//getLogger().info("Chat event fired");
+		getLogger().info("Chat event fired");
 		for (RemoteSession session: sessions) {
 			session.queueChatPostedEvent(event);
 		}
